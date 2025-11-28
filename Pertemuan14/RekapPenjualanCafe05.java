@@ -2,20 +2,34 @@ package Pertemuan14;
 import java.util.Scanner;
 public class RekapPenjualanCafe05 {
 
-    static String[] menu = {
-        "Kopi          ",
-        "Teh           ",
-        "Es Kelapa Muda",
-        "Roti bakar    ",
-        "Gorengan      "};
-    static int[][] penjualan = new int [5][7];
+    static String[] menu ;
+    static int[][] penjualan ;
     static Scanner sc = new Scanner(System.in);
+    static int jumlahMenu, jumlahHari;
+
+    static void menuHari(){
+        System.out.print("Masukkan jumlah menu : ");
+        jumlahMenu = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Masukkan jumlah hari : " );
+        jumlahHari=sc.nextInt();
+        sc.nextLine();
+
+        menu= new String[jumlahMenu];
+        penjualan = new int[jumlahMenu][jumlahHari];
+
+        for (int i = 0; i < jumlahMenu;i++){
+            System.out.print("Nama menu Ke- " + (i+1) + " : " );
+            menu[i]=sc.nextLine();
+        }
+    }
     
     static void inputData(){
         for (int i = 0; i < menu.length; i++){
             System.out.println("\nInput Penjualan " + menu[i]);
 
-            for (int j = 0; j < penjualan[i].length; j++){
+            for (int j = 0; j < jumlahHari; j++){
                 System.out.print("Hari Ke - " + (j+1) + " : ");
                 penjualan[i][j]=sc.nextInt();
             }
@@ -23,21 +37,21 @@ public class RekapPenjualanCafe05 {
     }
 
     static void tampilArray(){
-        System.out.println("\n===================================================================");
+        System.out.println("\n================DATA PENJUALAN CAFE =================");
         System.out.print("Menu \t\t");
-        for (int j = 0; j < penjualan[0].length; j++){
+        for (int j = 0; j < jumlahHari; j++){
             System.out.print("H" + (j+1) +"\t");
         }
-        System.out.println("\n-------------------------------------------------------------------");
+        System.out.println("\n-----------------------------------------------------");
 
         for (int i = 0; i < menu.length;i++){
-            System.out.print(menu[i] +  "\t");
-            for(int j = 0; j < penjualan[i].length;  j++){
+            System.out.print(menu[i] +  "\t\t");
+            for(int j = 0; j < jumlahHari;  j++){
                 System.out.print(penjualan[i][j] + "\t");
             }
             System.out.println();
         }
-        System.out.println("=======================================================================");
+        System.out.println("====================================================");
     }
 
     static void menuterlaris(){
@@ -46,7 +60,7 @@ public class RekapPenjualanCafe05 {
 
         for (int i = 0 ;i < menu.length; i++){
             int total = 0;
-            for (int j = 0; j < penjualan[i].length; j++){
+            for (int j = 0; j < jumlahHari; j++){
                 total+= penjualan[i][j];
             } if (total>max){
                 max=total;
@@ -59,19 +73,19 @@ public class RekapPenjualanCafe05 {
     }
 
     static void ratRata(){
-        System.out.println("\n========Rata Rata Penjualan=======");
+        System.out.println("\n============Rata Rata Penjualan==========");
         for(int i = 0; i < menu.length; i++){
         int total=0;
-        for(int j = 0; j < penjualan[i].length; j++){
+        for(int j = 0; j < jumlahHari; j++){
             total += penjualan[i][j];
         }
-        double rata=(double)total / penjualan[i].length;
-        System.out.println((menu[i])+ " = "+rata);
+        double rata=(double)total / jumlahHari;
+        System.out.println((menu[i])+ " : "+rata);
         }
     }
     public static void main (String[]args){
-        Scanner sc = new Scanner(System.in);
-
+       
+        menuHari();
         inputData();
         tampilArray();
         menuterlaris();
